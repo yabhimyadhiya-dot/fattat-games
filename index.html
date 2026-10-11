@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0c0f">
+    <meta name="description" content="ألعاب فتيته: اكتشف ألعاب متصفح مجانية، ابحث عن لعبتك المفضلة، واحفظ الألعاب التي تحبها في مكتبة عربية سهلة.">
+    <meta name="keywords" content="ألعاب فتيته, العاب فتيته, ألعاب متصفح, ألعاب مجانية">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_AR">
+    <meta property="og:site_name" content="ألعاب فتيته">
+    <meta property="og:title" content="ألعاب فتيته | ألعاب متصفح مجانية">
+    <meta property="og:description" content="اكتشف ألعاب المتصفح، وابحث واحفظ مفضلتك في مكتبة ألعاب فتيته.">
+    <title>ألعاب فتيته | ألعاب متصفح مجانية</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0b0c0f;
+            --panel: #13151a;
+            --panel-light: #1b1e25;
+            --text: #f4f2ed;
+            --muted: #a3a5ad;
+            --accent: #ffe35b;
+            --line: rgba(255, 255, 255, .1);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(ellipse at 8% 8%, rgba(255, 227, 91, .07), transparent 30rem),
+                var(--bg);
+            color: var(--text);
+            font-family: Tahoma, Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        button, input { font: inherit; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+
+        .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            border-bottom: 1px solid var(--line);
+            background: rgba(11, 12, 15, .88);
+            backdrop-filter: blur(16px);
+        }
+
+        .nav {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.15rem;
+            font-weight: 900;
+            letter-spacing: -.04em;
+        }
+
+        .brand-mark {
+            display: grid;
+            place-items: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 11px;
+            color: #171710;
+            background: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .nav-links { display: flex; align-items: center; color: #c7c7c9; font-size: .9rem; }
+        .nav-links a:hover, .nav-links a:focus-visible { color: var(--accent); }
+
+        .nav-cta {
+            padding: 10px 16px;
+            border-radius: 9px;
+            color: #171710;
+            background: var(--accent);
+            font-weight: 800;
+            font-size: .88rem;
+        }
+
+        .hero { padding: 72px 0 34px; }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            font-size: .78rem;
+            font-weight: 800;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+            box-shadow: 0 0 14px currentColor;
+        }
+
+        h1 {
+            max-width: 850px;
+            margin: 13px 0 12px;
+            font-size: clamp(2.6rem, 7vw, 5.7rem);
+            line-height: 1.05;
+            letter-spacing: -.055em;
+        }
+
+        h1 span { color: var(--accent); }
+
+        .hero-copy { max-width: 650px; margin: 0; color: #b6b7bd; font-size: 1.02rem; }
+
+        .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+
+        .primary-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 18px;
+            border-radius: 10px;
+            font-weight: 800;
+        }
+
+        .primary-link { color: #171710; background: var(--accent); }
+        .primary-link:hover, .nav-cta:hover { background: #ffed91; }
+        .random-game { border: 1px solid var(--line); color: var(--text); background: rgba(255,255,255,.035); cursor: pointer; }
+        .random-game:hover { border-color: var(--accent); color: var(--accent); }
+
+        .stats { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 31px; }
+        .stat {
+            padding: 7px 12px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: #c2c3c9;
+            background: rgba(255, 255, 255, .025);
+            font-size: .79rem;
+        }
+        .stat strong { color: var(--text); }
+
+        .library { padding: 26px 0 74px; }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 21px;
+        }
+
+        .section-heading h2 { margin: 0; font-size: clamp(1.65rem, 4vw, 2.35rem); letter-spacing: -.04em; }
+        .section-heading p { margin: 4px 0 0; color: var(--muted); font-size: .9rem; }
+        .result-count { color: var(--muted); font-size: .85rem; white-space: nowrap; }
+
+        .controls { display: grid; grid-template-columns: minmax(220px, 1fr) auto; gap: 14px; margin-bottom: 22px; }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 49px;
+            padding: 0 15px;
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            background: var(--panel);
+            color: var(--muted);
+        }
+
+        .search-box:focus-within { border-color: rgba(255, 227, 91, .65); box-shadow: 0 0 0 3px rgba(255, 227, 91, .09); }
+        .search-box input { width: 100%; border: 0; outline: 0; color: var(--text); background: transparent; }
+        .search-box input::placeholder { color: #797c85; }
+
+        .filters { display: flex; align-items: center; gap: 7px; overflow-x: auto; scrollbar-width: thin; }
+        .library-filters { margin: -7px 0 18px; }
+        .library-status { min-height: 22px; margin: -11px 0 14px; color: var(--muted); font-size: .8rem; }
+
+        .filter {
+            flex: 0 0 auto;
+            min-height: 42px;
+            padding: 0 13px;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            color: #c4c5cb;
+            background: var(--panel);
+            cursor: pointer;
+        }
+
+        .filter:hover { border-color: rgba(255, 255, 255, .25); }
+        .filter[aria-pressed="true"] { border-color: var(--accent); color: #171710; background: var(--accent); font-weight: 800; }
+
+        .game-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 17px; }
+
+        .game-card {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            background: var(--panel);
+            transition: transform .18s ease, border-color .18s ease;
+        }
+
+        .game-card[hidden] { display: none; }
+        .game-open, .game-open:hover { display: block; color: inherit; text-decoration: none; }
+        .game-card:hover { transform: translateY(-4px); border-color: rgba(255, 227, 91, .42); }
+        .game-open:focus-visible { outline-offset: -3px; }
+
+        .game-art {
+            position: relative;
+            min-height: 160px;
+            overflow: hidden;
+            background: #20232b;
+        }
+
+        .game-art::after {
+            position: absolute;
+            inset: 45% 0 0;
+            content: "";
+            background: linear-gradient(transparent, rgba(11, 12, 15, .35));
+            pointer-events: none;
+        }
+        .game-image { display: block; width: 100%; height: 100%; min-height: 160px; object-fit: cover; }
+        .game-image[hidden] { display: none; }
+        .game-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 9px;
+            border: 1px solid rgba(255, 255, 255, .24);
+            border-radius: 999px;
+            color: white;
+            background: rgba(11, 12, 15, .45);
+            font-size: .7rem;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+        }
+        .favorite-toggle {
+            position: absolute;
+            z-index: 1;
+            top: 10px;
+            left: 10px;
+            display: grid;
+            place-items: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 50%;
+            color: #fff;
+            background: rgba(11,12,15,.62);
+            font-size: 1.15rem;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+        }
+        .favorite-toggle[aria-pressed="true"] { color: #ff7186; border-color: #ff7186; }
+        .favorite-toggle:hover { transform: scale(1.06); }
+        .game-card.is-picked { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,227,91,.16); }
+
+        .game-info { padding: 15px; }
+        .game-title-row { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
+        .game-title { margin: 0; font-size: 1.08rem; font-weight: 800; }
+        .game-type { color: var(--muted); font-size: .75rem; white-space: nowrap; }
+        .game-description { min-height: 44px; margin: 7px 0 14px; color: #aeb0b8; font-size: .83rem; }
+        .game-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
+        .tag { padding: 3px 8px; border-radius: 6px; color: #c4c5cb; background: var(--panel-light); font-size: .69rem; }
+
+        .play-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 41px;
+            padding: 0 12px;
+            border: 1px solid rgba(255, 227, 91, .22);
+            border-radius: 8px;
+            color: var(--accent);
+            background: rgba(255, 227, 91, .055);
+            font-size: .84rem;
+            font-weight: 800;
+        }
+
+        .game-open:hover .play-link, .game-open:focus-visible .play-link { color: #171710; background: var(--accent); }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            padding: 45px 20px;
+            border: 1px dashed var(--line);
+            border-radius: 14px;
+            color: var(--muted);
+            text-align: center;
+        }
+        .empty-state strong { display: block; margin-bottom: 5px; color: var(--text); font-size: 1.1rem; }
+
+        footer { padding: 18px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; text-align: center; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+        @media (max-width: 850px) {
+            .controls { grid-template-columns: 1fr; }
+            .filters { padding-bottom: 3px; }
+            .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 600px) {
+            .wrap { width: min(100% - 28px, 460px); }
+            .nav { min-height: 62px; }
+            .nav-links { font-size: .8rem; }
+            .nav-cta { padding: 9px 11px; font-size: .78rem; }
+            .hero { padding-top: 51px; }
+            .hero-copy { font-size: .93rem; }
+            .game-grid { grid-template-columns: 1fr; }
+            .game-art { min-height: 175px; }
+            .section-heading { align-items: start; flex-direction: column; gap: 7px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition-duration: .01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <nav class="nav wrap" aria-label="التنقل الرئيسي">
+            <a class="brand" href="#" aria-label="ألعاب فتيته - الرئيسية">
+                <span class="brand-mark" aria-hidden="true">ف</span>
+                <span>فتيته<span style="color:var(--accent)">.</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#games">الألعاب</a>
+            </div>
+            <a class="nav-cta" href="#games">🎮 اكتشف الألعاب</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero wrap" aria-labelledby="hero-title">
+            <span class="eyebrow">مساحتك الخاصة للألعاب</span>
+            <h1 id="hero-title">العبها من <span>متصفحك.</span></h1>
+            <p class="hero-copy">
+                أهلًا بك في ألعاب فتيته! تصفّح الألعاب وافتح صفحة كل لعبة مباشرةً.
+                تبدأ اللعبة من صفحة المصدر، وقد يستخدم بعضها مزوّد تشغيل خارجيًا.
+            </p>
+            <div class="hero-actions">
+                <a class="primary-link" href="#games">استكشف الألعاب <span aria-hidden="true">←</span></a>
+                <button class="primary-link random-game" id="random-game" type="button">🎲 رشّح لي لعبة</button>
+            </div>
+            <div class="stats" aria-label="مميزات الموقع">
+                <span class="stat"><strong>٦٤</strong> لعبة وصفحة ألعاب</span>
+                <span class="stat">🌐 تعمل من المتصفح</span>
+                <span class="stat">⬇️ بلا تحميل</span>
+            </div>
+        </section>
+
+        <section class="library wrap" id="games" aria-labelledby="games-title">
+            <div class="section-heading">
+                <div>
+                    <h2 id="games-title">مكتبة الألعاب</h2>
+                    <p>مكتبة ألعابك: احفظ المفضلة وتابع ما لعبته مؤخرًا.</p>
+                </div>
+                <span class="result-count" id="result-count" aria-live="polite"></span>
+            </div>
+
+            <div class="controls">
+                <label class="search-box">
+                    <span aria-hidden="true">⌕</span>
+                    <input id="game-search" type="search" placeholder="ابحث عن لعبة..." autocomplete="off" aria-label="ابحث عن لعبة">
+                </label>
+                <div class="filters" role="group" aria-label="ترتيب الألعاب">
+                    <button class="filter" type="button" data-sort="popular" aria-pressed="true">الأكثر رواجًا</button>
+                    <button class="filter" type="button" data-sort="newest" aria-pressed="false">الأحدث أولًا</button>
+                    <button class="filter" type="button" data-sort="az" aria-pressed="false">أ - ي</button>
+                </div>
+            </div>
+
+            <div class="filters library-filters" role="group" aria-label="عرض الألعاب">
+                <button class="filter" type="button" data-view="all" aria-pressed="true">كل الألعاب</button>
+                <button class="filter" type="button" data-view="favorites" aria-pressed="false">♥ المفضلة <span id="favorites-count">0</span></button>
+                <button class="filter" type="button" data-view="recent" aria-pressed="false">◷ لعبت مؤخرًا</button>
+            </div>
+            <p class="library-status" id="library-status" role="status" aria-live="polite"></p>
+
+            <div class="game-grid" id="game-grid">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="wrap">جميع الحقوق محفوظة لدى فتيته © <span id="year"></span>.</p>
+    </footer>
+
+    <script>
+        const searchInput = document.querySelector("#game-search");
+        const sortButtons = [...document.querySelectorAll("[data-sort]")];
+        const viewButtons = [...document.querySelectorAll("[data-view]")];
+        const resultCount = document.querySelector("#result-count");
+        const favoritesCount = document.querySelector("#favorites-count");
+        const libraryStatus = document.querySelector("#library-status");
+        const grid = document.querySelector("#game-grid");
+        const baseUrl = "https://www.inxanitylabs.com";
+        const normalizeSearch = (value) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("en");
+        const favoritesKey = "ftita-game-favorites";
+        const recentKey = "ftita-recent-games";
+        const games = [
+            ["Fortnite OG", "fortnite-og", "new"],
+            ["GTA V", "gta-v", "updated"],
+            ["Black Ops II (Vibe Slops II)", "black-ops-2"],
+            ["Modern Warfare 2", "modern-warfare-2"],
+            ["Black Ops Zombies", "bo1-zombies"],
+            ["Minecraft 1.8.8", "minecraft"],
+            ["Cuphead", "cuphead"],
+            ["Clustertruck", "clustertruck"],
+            ["Pokémon Redstone", "pokemon-redstone"],
+            ["Cheese Cube (Zombies)", "cheese-cube"],
+            ["Kino der Toten", "kino-der-toten"],
+            ["Super Mario Zombies", "super-mario-zombies"],
+            ["Halo: Combat Evolved", "halo-ce"],
+            ["The Simpsons: Hit & Run", "simpsons-hit-and-run"],
+            ["Taipei Rush", "taipei-rush"],
+            ["PEAK", "peak"],
+            ["How to Fish", "how-to-fish"],
+            ["Flash Games (878)", "flash-games"],
+            ["Among Us", "among-us"],
+            ["Half-Life", "half-life"],
+            ["Lethal Company", "lethal-company"],
+            ["Surfd", "surfd"],
+            ["Redcoats", "redcoats"],
+            ["DOOM II Multiplayer", "doom"],
+            ["Granny 3", "granny-3"],
+            ["Salty Seas", "salty-seas"],
+            ["Plague Inc", "plague-inc"],
+            ["Stardew Valley", "stardew-valley"],
+            ["Moon (Zombies)", "moon-zombies"],
+            ["Hill Climb Racing", "hill-climb-racing"],
+            ["LEGO Island", "lego-island"],
+            ["Ravenfield", "ravenfield"],
+            ["Urban Terror", "urban-terror"],
+            ["Trombone Champ", "trombone-champ"],
+            ["Diablo", "diablo"],
+            ["Quake II", "quake-2"],
+            ["Ages of Conflict", "ages-of-conflict"],
+            ["Arcade Classics (227)", "arcade-classics"],
+            ["Return to Castle Wolfenstein", "rtcw"],
+            ["Bendy and the Ink Machine", "bendy"],
+            ["SCP: Containment Breach", "scp-containment-breach"],
+            ["MiSide", "miside"],
+            ["Cheese Rolling", "cheese-rolling"],
+            ["RimWorld", "rimworld"],
+            ["Helltaker", "helltaker"],
+            ["The Man From The Window 2", "man-from-the-window-2"],
+            ["QuakeWorld", "quakeworld"],
+            ["Baldi's Basics Birthday Bash", "baldis-birthday-bash"],
+            ["Inscryption", "inscryption"],
+            ["Park Baron", "park-baron"],
+            ["Seedbed", "seedbed"],
+            ["Boil Noodles at Night", "boil-noodles-at-night"],
+            ["Toasterball", "toasterball"],
+            ["Dude, Stop", "dude-stop"],
+            ["The Message From Deep Space", "message-from-deep-space"],
+            ["Brotato Paws n' Claws", "brotato"],
+            ["Happy Room", "happy-room"],
+            ["Dice A Million", "dice-a-million"],
+            ["Beatblock", "beatblock"],
+            ["while True: learn()", "while-true-learn"],
+            ["Lobotomy Corporation", "lobotomy-corporation"],
+            ["FEZ", "fez"],
+            ["OneShot: World Machine Edition", "oneshot"],
+            ["Crashout Crew", "crashout-crew"]
+        ];
+        let favorites = new Set();
+        let recentGames = [];
+        let storageAvailable = true;
+        let activeView = "all";
+        let activeSort = "popular";
+
+        try {
+            const storedFavorites = JSON.parse(localStorage.getItem(favoritesKey) || "[]");
+            const storedRecent = JSON.parse(localStorage.getItem(recentKey) || "[]");
+            const validSlugs = new Set(games.map((game) => game[1]));
+            if (Array.isArray(storedFavorites)) favorites = new Set(storedFavorites.filter((slug) => validSlugs.has(slug)));
+            if (Array.isArray(storedRecent)) recentGames = [...new Set(storedRecent.filter((slug) => validSlugs.has(slug)))].slice(0, 12);
+        } catch (error) {
+            if (error.name !== "SecurityError" && !(error instanceof SyntaxError)) throw error;
+            storageAvailable = false;
+            libraryStatus.textContent = "الحفظ الدائم غير متاح في هذا المتصفح؛ ستبقى المفضلة لهذه الجلسة فقط.";
+        }
+
+        function savePersonalLists() {
+            if (!storageAvailable) return false;
+            try {
+                localStorage.setItem(favoritesKey, JSON.stringify([...favorites]));
+                localStorage.setItem(recentKey, JSON.stringify(recentGames));
+                return true;
+            } catch (error) {
+                if (error.name !== "SecurityError" && error.name !== "QuotaExceededError") throw error;
+                storageAvailable = false;
+                libraryStatus.textContent = "تعذر حفظ التغييرات في المتصفح؛ ستبقى المفضلة لهذه الجلسة فقط.";
+                return false;
+            }
+        }
+
+        const cards = games.map(([title, slug, status]) => {
+            const card = document.createElement("article");
+            const openLink = document.createElement("a");
+            const favoriteButton = document.createElement("button");
+            const badge = status === "new" ? "جديدة" : status === "updated" ? "محدّثة" : "لعبة";
+            card.className = "game-card";
+            card.dataset.name = normalizeSearch(title);
+            card.dataset.slug = slug;
+            card.dataset.status = status || "regular";
+            openLink.className = "game-open";
+            openLink.href = `${baseUrl}/games/${slug}`;
+            openLink.rel = "noopener noreferrer";
+            openLink.setAttribute("aria-label", `${title} — ابدأ اللعب`);
+            const extension = slug === "pokemon-redstone" ? "webp" : "jpg";
+            openLink.innerHTML = `<div class="game-art"><img class="game-image" alt="" loading="lazy" decoding="async"><span class="game-badge"></span></div><div class="game-info"><div class="game-title-row"><h3 class="game-title"></h3><span class="game-type">لعبة متصفح</span></div><p class="game-description">افتح صفحة اللعبة وابدأ اللعب.</p><div class="game-meta"><span class="tag">العب الآن من المتصفح</span></div><span class="play-link"><span>ابدأ اللعب</span><span aria-hidden="true">↗</span></span></div>`;
+            openLink.querySelector(".game-image").src = `${baseUrl}/assets/games/${slug}.${extension}`;
+            openLink.querySelector(".game-title").textContent = title;
+            openLink.querySelector(".game-badge").textContent = badge;
+            openLink.addEventListener("click", () => {
+                recentGames = [slug, ...recentGames.filter((item) => item !== slug)].slice(0, 12);
+                savePersonalLists();
+            });
+
+            favoriteButton.type = "button";
+            favoriteButton.className = "favorite-toggle";
+            favoriteButton.dataset.favorite = slug;
+            favoriteButton.setAttribute("aria-pressed", String(favorites.has(slug)));
+            favoriteButton.setAttribute("aria-label", favorites.has(slug) ? `إزالة ${title} من المفضلة` : `إضافة ${title} إلى المفضلة`);
+            favoriteButton.textContent = favorites.has(slug) ? "♥" : "♡";
+            favoriteButton.addEventListener("click", () => {
+                if (favorites.has(slug)) {
+                    favorites.delete(slug);
+                } else {
+                    favorites.add(slug);
+                }
+                favoriteButton.setAttribute("aria-pressed", String(favorites.has(slug)));
+                favoriteButton.setAttribute("aria-label", favorites.has(slug) ? `إزالة ${title} من المفضلة` : `إضافة ${title} إلى المفضلة`);
+                favoriteButton.textContent = favorites.has(slug) ? "♥" : "♡";
+                favoritesCount.textContent = favorites.size;
+                savePersonalLists();
+                updateGames();
+            });
+            card.append(openLink, favoriteButton);
+            const image = openLink.querySelector(".game-image");
+            image.addEventListener("error", () => {
+                image.hidden = true;
+            }, { once: true });
+            return card;
+        });
+        const emptyState = document.createElement("div");
+        emptyState.className = "empty-state";
+        emptyState.hidden = true;
+        emptyState.innerHTML = "<strong>ما لقينا ألعاب بهذا البحث</strong><span>جرّب اسمًا مختلفًا أو امسح عبارة البحث.</span>";
+        grid.append(...cards, emptyState);
+        const cardBySlug = new Map(cards.map((card) => [card.dataset.slug, card]));
+
+        function updateGames() {
+            const query = normalizeSearch(searchInput.value.trim());
+            let sortedGames = [...games];
+            if (activeSort === "newest") {
+                const rank = (game) => game[2] === "new" ? 2 : game[2] === "updated" ? 1 : 0;
+                sortedGames.sort((a, b) => rank(b) - rank(a));
+            } else if (activeSort === "az") {
+                sortedGames.sort((a, b) => a[0].localeCompare(b[0], "en"));
+            }
+            if (activeView === "favorites") sortedGames = sortedGames.filter((game) => favorites.has(game[1]));
+            if (activeView === "recent") {
+                sortedGames = recentGames
+                    .map((slug) => games.find((game) => game[1] === slug))
+                    .filter(Boolean);
+                if (activeSort === "az") sortedGames.sort((a, b) => a[0].localeCompare(b[0], "en"));
+                if (activeSort === "newest") {
+                    const rank = (game) => game[2] === "new" ? 2 : game[2] === "updated" ? 1 : 0;
+                    sortedGames.sort((a, b) => rank(b) - rank(a));
+                }
+            }
+            const orderedCards = sortedGames.map((game) => cardBySlug.get(game[1]));
+            let visibleCount = 0;
+            cards.forEach((card) => {
+                card.hidden = true;
+            });
+            orderedCards.forEach((card) => {
+                const isVisible = card.dataset.name.includes(query);
+                card.hidden = !isVisible;
+                visibleCount += Number(isVisible);
+            });
+            grid.append(...orderedCards, emptyState);
+            emptyState.hidden = visibleCount !== 0;
+            favoritesCount.textContent = favorites.size;
+            resultCount.textContent = `عرض ${visibleCount} من ${sortedGames.length} لعبة`;
+            if (activeView === "favorites" && sortedGames.length === 0 && !query) {
+                emptyState.innerHTML = "<strong>قائمة المفضلة فارغة</strong><span>اضغط على رمز القلب لحفظ الألعاب التي تعجبك.</span>";
+            } else if (activeView === "recent" && sortedGames.length === 0 && !query) {
+                emptyState.innerHTML = "<strong>لا توجد ألعاب حديثة بعد</strong><span>الألعاب التي تفتحها ستظهر هنا.</span>";
+            } else {
+                emptyState.innerHTML = "<strong>ما لقينا ألعاب بهذا البحث</strong><span>جرّب اسمًا مختلفًا أو امسح عبارة البحث.</span>";
+            }
+        }
+
+        searchInput.addEventListener("input", updateGames);
+        sortButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                activeSort = button.dataset.sort;
+                sortButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+                updateGames();
+            });
+        });
+        viewButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                activeView = button.dataset.view;
+                viewButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+                updateGames();
+            });
+        });
+
+        document.querySelector("#random-game").addEventListener("click", () => {
+            searchInput.value = "";
+            activeView = "all";
+            activeSort = "popular";
+            viewButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.view === "all")));
+            sortButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.sort === "popular")));
+            updateGames();
+            const pick = games[Math.floor(Math.random() * games.length)];
+            const card = cardBySlug.get(pick[1]);
+            card.classList.add("is-picked");
+            card.scrollIntoView({ behavior: "smooth", block: "center" });
+            libraryStatus.textContent = `ترشيح فتيته لك: ${pick[0]}.`;
+            window.setTimeout(() => card.classList.remove("is-picked"), 2200);
+        });
+
+        document.querySelector("#year").textContent = new Date().getFullYear();
+        updateGames();
+    </script>
+</body>
+</html>
